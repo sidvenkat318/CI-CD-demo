@@ -27,15 +27,15 @@ jobs:
 
       - name: Preprocess data
         run: |
-          python C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/Preprocessing.py
+          python "C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/Preprocessing.py"
 
       - name: Train model
         run: |
-          python C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/NN.py
+          python "C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/NN.py"
           
       - name: Run unit test
         run: | 
-          python -m unittest C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/Unit test.py
+          python -m unittest "C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/Unit test.py"
 
   save_and_download_model:
     runs-on: ubuntu-latest
@@ -56,7 +56,7 @@ jobs:
 
       - name: Run NN.py script and save model
         run: |
-          python C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/NN.py  # Run the script to generate the model
+          python "C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/NN.py"  
 
       - name: Save Model as Artifact
         uses: actions/upload-artifact@v2
