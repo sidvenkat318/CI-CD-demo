@@ -25,9 +25,17 @@ jobs:
           pip install --upgrade pip
           pip install tensorflow keras scikit-learn numpy pandas matplotlib seaborn imbalanced-learn  # List your dependencies here
 
-      - name: Run Unit Tests
+      - name: Preprocess data
         run: |
-          python -m unittest discover -s tests -p "Unit test.py"  # Adjust based on your test file location
+          python Preprocess.py
+
+      - name: Preprocess data
+        run: |
+          python NN.py
+          
+      - name: Run unit test
+        run: | 
+          python -m unittest Unit test.py
 
   save_and_download_model:
     runs-on: ubuntu-latest
