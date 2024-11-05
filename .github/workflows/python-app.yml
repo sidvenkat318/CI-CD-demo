@@ -27,15 +27,15 @@ jobs:
 
       - name: Preprocess data
         run: |
-          python Preprocess.py
+          python C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/Preprocessing.py
 
-      - name: Preprocess data
+      - name: Train model
         run: |
-          python NN.py
+          python C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/NN.py
           
       - name: Run unit test
         run: | 
-          python -m unittest Unit test.py
+          python -m unittest C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/Unit test.py
 
   save_and_download_model:
     runs-on: ubuntu-latest
