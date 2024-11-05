@@ -18,12 +18,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.12.7  # Set the Python version you're using
+          python-version: 3.8  # Set the Python version you're using
 
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install -r requirements.txt  # Make sure to have all dependencies in requirements.txt
+          pip install tensorflow keras scikit-learn numpy pandas matplotlib seaborn imbalanced-learn  # List your dependencies here
 
       - name: Run Unit Tests
         run: |
@@ -44,7 +44,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install -r requirements.txt  # Install necessary packages
+          pip install tensorflow keras scikit-learn numpy pandas matplotlib seaborn imbalanced-learn  # List your dependencies here
 
       - name: Run NN.py script and save model
         run: |
@@ -53,10 +53,10 @@ jobs:
       - name: Save Model as Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: diabetes-NN  # Artifact name
+          name: diabetes-model  # Artifact name
           path: path_to_your_saved_model  # Specify the path to where your model is saved
 
       - name: Download Model Artifact
         uses: actions/download-artifact@v2
         with:
-          name: diabetes-NN  # Artifact name
+          name: diabetes-model  # Artifact name
