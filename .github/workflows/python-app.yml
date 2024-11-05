@@ -27,7 +27,7 @@ jobs:
 
       - name: Run Unit Tests
         run: |
-          python -m unittest discover -s tests -p "C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Unit test.py"  # Adjust based on your test file location
+          python -m unittest discover -s tests -p "Unit test.py"  # Adjust based on your test file location
 
   save_and_download_model:
     runs-on: ubuntu-latest
