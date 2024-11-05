@@ -1,0 +1,62 @@
+name: CI/CD for Diabetes Model
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull requests to the main branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Use a Linux runner, or choose another runner if needed
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Checkout the code from the repository
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12.7  # Set the Python version you're using
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt  # Make sure to have all dependencies in requirements.txt
+
+      - name: Run Unit Tests
+        run: |
+          python -m unittest discover -s tests -p "test_diabetes_model.py"  # Adjust based on your test file location
+
+  save_and_download_model:
+    runs-on: ubuntu-latest
+    needs: test  # Ensure this job only runs if tests pass
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Checkout the code from the repository
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8  # Set the Python version you're using
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt  # Install necessary packages
+
+      - name: Run NN.py script and save model
+        run: |
+          python C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/NN.py  # Run the script to generate the model
+
+      - name: Save Model as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: diabetes-NN  # Artifact name
+          path: path_to_your_saved_model  # Specify the path to where your model is saved
+
+      - name: Download Model Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: diabetes-NN  # Artifact name
