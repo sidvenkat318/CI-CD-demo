@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 # Loading libraries
 import numpy as np
 import pandas as pd
@@ -23,42 +17,25 @@ from sklearn.metrics import roc_curve, auc
 from sklearn.linear_model import LogisticRegression
 from sklearn.utils import resample
 
-
-# In[2]:
-
-
-import nbformat
-from nbconvert.preprocessors import ExecutePreprocessor
-
-
-# In[15]:
-
-
-def run_notebook_and_get_df(notebook_path, target_variable):
-    with open(notebook_path) as f:
-        notebook = nbformat.read(f, as_version=4)
-
+def run_script_and_get_df(script_path, target_variable='df4'):
+    # Create a dictionary to hold variables created during script execution
     global_vars = {'pd': pd,
-                  'np':np,
-                  'sns':sns,
-                  'tf':tf,
-                  'plt':plt}
+                   'np': np,
+                   'sns': sns,
+                   'tf': tf,
+                   'plt': plt}
     
-    ep = ExecutePreprocessor(timeout=600, kernel_name='python3')
-    ep.preprocess(notebook, {'metadata': {'path': './'}})
-    
-    # Execute each cell in the notebook
-    for cell in notebook.cells:
-        if cell.cell_type == 'code':
-            exec(cell.source, global_vars)
-    
-    # Return the specific DataFrame
+    # Read and execute the Python script
+    with open(script_path, 'r', encoding='utf-8') as f:
+        code = f.read()
+        exec(code, global_vars)
+
+    # Return the specific DataFrame or variable requested
     return global_vars.get(target_variable)
 
-
-# Run the notebook and get the df4 DataFrame
-notebook_path = 'C:/Users/Sid/Desktop/DSOR 752/CI-CD demo/CI-CD-demo/Model/Preprocessing/Preprocessing.ipynb'
-df4 = run_notebook_and_get_df(notebook_path, 'df4')
+# Run the Python script and get the `df4` DataFrame
+script_path = 'C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/Preprocessing.py'
+df4 = run_script_and_get_df(script_path, 'df4')
 print(df4)
 
 

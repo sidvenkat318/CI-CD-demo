@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 # Loading libraries
 import numpy as np
 import pandas as pd
@@ -22,44 +16,34 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classifica
 from sklearn.metrics import roc_curve, auc
 from sklearn.linear_model import LogisticRegression
 from sklearn.utils import resample
+import os
+import sys
 
-
-# In[2]:
-
-
-import nbformat
-from nbconvert.preprocessors import ExecutePreprocessor
-
-
-# In[3]:
-
-
-def run_notebook_and_get_vars(notebook_path, target_variables):
-    with open(notebook_path, encoding='utf-8') as f:
-        notebook = nbformat.read(f, as_version=4)
-
+def run_script_and_get_vars(script_path, target_variables):
+    # Create a dictionary to store global variables during script execution
     global_vars = {'pd': pd,
-                  'np':np,
-                  'sns':sns,
-                  'tf':tf,
-                  'plt':plt,
-                  'Dense':Dense,
-                  'Sequential':Sequential}
-    
-    ep = ExecutePreprocessor(timeout=600, kernel_name='python3')
-    
-    # Execute each cell in the notebook
-    for cell in notebook.cells:
-        if cell.cell_type == 'code':
-            exec(cell.source, global_vars)
-    
-    # Return the specific DataFrame
+                   'np': np,
+                   'sns': sns,
+                   'tf': tf,
+                   'plt': plt,
+                   'Dense': Dense,
+                   'Sequential': Sequential}
+
+    # Read and execute the entire Python script
+    with open(script_path, 'r', encoding='utf-8') as f:
+        code = f.read()
+        exec(code, global_vars)
+
+    # Extract specified variables from the global_vars dictionary
     return {var: global_vars.get(var) for var in target_variables}
 
+# Run the script and get the specified variables
+script_path = 'C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/NN.py'
+variables = run_script_and_get_vars(script_path, ['model', 'X_test_std', 'X_valid_std', 'X_train_std', 'y_test', 'y_valid', 'y_train'])
 
-# Run the notebook and get the df4 DataFrame
-notebook_path = 'C:/Users/Sid/Desktop/DSOR 752/CI-CD demo/CI-CD-demo/Model/Training/NN.ipynb'
-variables = run_notebook_and_get_vars(notebook_path, ['model', 'X_test_std', 'X_valid_std','X_train_std','y_test','y_valid','y_train'])
+# Print or use the extracted variables
+print(variables)
+
 
 # Access extracted variables
 model = variables.get('model')
@@ -114,6 +98,7 @@ plt.title('Loss')
 plt.plot(history.history['loss'], label='train')
 plt.plot(history.history['val_loss'], label='validation')
 plt.legend()
+plt.show()
 
 
 # # Roc Curve
@@ -133,6 +118,7 @@ plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
 plt.title('ROC Curve')
 plt.legend(loc="lower right")
+plt.show()
 
 
 # # Confusion Matrix
@@ -150,6 +136,7 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels = [labels[i] f
 disp.plot(colorbar = False)
 
 plt.title('Confusion Matrix for Diabetes predictions')
+plt.show()
 
 
 # In[13]:
