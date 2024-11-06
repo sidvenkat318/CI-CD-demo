@@ -43,29 +43,9 @@ jobs:
           python -m unittest "Unit-test.py"
 
       - name: Save Model as Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
-          name: diabetes-model  # Artifact name
-            # Specify the path to where your model is saved
-
-      - name: Download Model Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: diabetes-model  # Artifact name
-
-  download_artifact:
-  
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Download Model Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: diabetes-model  # Name of the artifact to download
-          path: C:\Users\Sid\Desktop\DSOR 752  # Directory where the artifact will be downloaded
-
-      - name: List downloaded files
-        run: ls C:\Users\Sid\Desktop\DSOR 752  # Confirm that the files were downloaded
+          name: diabetes-model  
+          path: |
+            cd ${{ github.workspace }}/Model
+            diabetes_model.pkl  
