@@ -23,19 +23,22 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install tensorflow keras scikit-learn numpy pandas matplotlib seaborn imbalanced-learn  # List your dependencies here
+          pip install tensorflow keras scikit-learn numpy pandas matplotlib seaborn imbalanced-learn
 
       - name: Preprocess data
-        run: |
-          python "C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/Preprocessing.py"
+        run: | 
+          cd ${{ github.workspace }}         
+          python "Model/Preprocessing.py"
 
       - name: Train model
         run: |
-          python "C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/NN.py"
+          cd ${{ github.workspace }}/Model 
+          python "NN.py"
           
       - name: Run unit test
         run: | 
-          python -m unittest "C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/Unit test.py"
+          cd ${{ github.workspace }} 
+          python -m unittest "Unit test.py"
 
   save_and_download_model:
     runs-on: ubuntu-latest
