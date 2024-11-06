@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install tensorflow keras scikit-learn numpy pandas matplotlib seaborn imbalanced-learn 
+          pip install tensorflow keras scikit-learn numpy pandas matplotlib seaborn imbalanced-learn unittest
 
       - name: Preprocess data
         run: | 
