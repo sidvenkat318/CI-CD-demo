@@ -9,7 +9,9 @@ on:
       - main  # Trigger on pull requests to the main branch
 
 jobs:
+
   test:
+  
     runs-on: ubuntu-latest  # Use a Linux runner, or choose another runner if needed
     steps:
       - name: Checkout code
@@ -44,9 +46,26 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: diabetes-model  # Artifact name
-          path: C:\Users\Sid\Desktop\DSOR 752  # Specify the path to where your model is saved
+            # Specify the path to where your model is saved
 
       - name: Download Model Artifact
         uses: actions/download-artifact@v2
         with:
           name: diabetes-model  # Artifact name
+
+  download_artifact:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download Model Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: diabetes-model  # Name of the artifact to download
+          path: C:\Users\Sid\Desktop\DSOR 752  # Directory where the artifact will be downloaded
+
+      - name: List downloaded files
+        run: ls C:\Users\Sid\Desktop\DSOR 752  # Confirm that the files were downloaded
