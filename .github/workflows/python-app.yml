@@ -40,28 +40,6 @@ jobs:
           cd ${{ github.workspace }}/Model 
           python -m unittest "Unit-test.py"
 
-  save_and_download_model:
-    runs-on: ubuntu-latest
-    needs: test  # Ensure this job only runs if tests pass
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2  # Checkout the code from the repository
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8  # Set the Python version you're using
-
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install tensorflow keras scikit-learn numpy pandas matplotlib seaborn imbalanced-learn  # List your dependencies here
-
-      - name: Run NN.py script and save model
-        run: |
-          cd ${{ github.workspace }}/Model 
-          python "NN.py"
-
       - name: Save Model as Artifact
         uses: actions/upload-artifact@v2
         with:
