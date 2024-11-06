@@ -16,47 +16,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classifica
 from sklearn.metrics import roc_curve, auc
 from sklearn.linear_model import LogisticRegression
 from sklearn.utils import resample
-import os
-import sys
-
-def run_script_and_get_vars(script_path, target_variables):
-    # Create a dictionary to store global variables during script execution
-    global_vars = {'pd': pd,
-                   'np': np,
-                   'sns': sns,
-                   'tf': tf,
-                   'plt': plt,
-                   'Dense': Dense,
-                   'Sequential': Sequential}
-
-    # Read and execute the entire Python script
-    with open(script_path, 'r', encoding='utf-8') as f:
-        code = f.read()
-        exec(code, global_vars)
-
-    # Extract specified variables from the global_vars dictionary
-    return {var: global_vars.get(var) for var in target_variables}
-
-# Run the script and get the specified variables
-script_path = 'C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/NN.py'
-variables = run_script_and_get_vars(script_path, ['model', 'X_test_std', 'X_valid_std', 'X_train_std', 'y_test', 'y_valid', 'y_train'])
-
-# Print or use the extracted variables
-print(variables)
-
-
-# Access extracted variables
-model = variables.get('model')
-X_train_std = variables.get('X_train_std')
-X_test_std = variables.get('X_test_std')
-X_valid_std = variables.get('X_valid_std')
-y_train = variables.get('y_train')
-y_test = variables.get('y_test')
-y_valid = variables.get('y_valid')
-
-
-# In[4]:
-
+from NN import *
 
 early_stopping = EarlyStopping(
     monitor='val_loss', 
