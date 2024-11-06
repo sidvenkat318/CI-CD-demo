@@ -37,7 +37,7 @@ jobs:
           
       - name: Run unit test
         run: | 
-          cd ${{ github.workspace }} 
+          cd ${{ github.workspace }}/Model 
           python -m unittest "Unit-test.py"
 
   save_and_download_model:
