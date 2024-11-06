@@ -1,7 +1,6 @@
 # Loading libraries
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from sklearn.model_selection import train_test_split, GridSearchCV
@@ -9,18 +8,10 @@ from sklearn.preprocessing import StandardScaler
 from imblearn.over_sampling import SMOTE
 from tensorflow.keras.callbacks import EarlyStopping
 import tensorflow as tf
-import seaborn as sns
 from tensorflow import keras
 from sklearn.utils import resample
-import os
-import sys
-
-def run_script_and_get_vars(script_path, target_variables):
-    global_vars = {'pd': pd, 'np': np, 'sns': sns, 'tf': tf, 'plt': plt, 'Dense': Dense, 'Sequential': Sequential}
-    with open(script_path, 'r', encoding='utf-8') as f:
-        code = f.read()
-        exec(code, global_vars)
-    return {var: global_vars.get(var) for var in target_variables}
+import unittest
+from NN import *
 
 # Test Class
 class TestDiabetesModel(unittest.TestCase):

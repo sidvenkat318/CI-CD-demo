@@ -16,33 +16,9 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classifica
 from sklearn.metrics import roc_curve, auc
 from sklearn.linear_model import LogisticRegression
 from sklearn.utils import resample
+from Preprocessing import *
 
-def run_script_and_get_df(script_path, target_variable='df4'):
-    # Create a dictionary to hold variables created during script execution
-    global_vars = {'pd': pd,
-                   'np': np,
-                   'sns': sns,
-                   'tf': tf,
-                   'plt': plt}
-    
-    # Read and execute the Python script
-    with open(script_path, 'r', encoding='utf-8') as f:
-        code = f.read()
-        exec(code, global_vars)
-
-    # Return the specific DataFrame or variable requested
-    return global_vars.get(target_variable)
-
-# Run the Python script and get the `df4` DataFrame
-script_path = 'C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/Preprocessing.py'
-df4 = run_script_and_get_df(script_path, 'df4')
 print(df4)
-
-
-# ## Splitting data
-
-# In[20]:
-
 
 x = df4.iloc[:,:-1]
 y = df4.iloc[:,-1]
