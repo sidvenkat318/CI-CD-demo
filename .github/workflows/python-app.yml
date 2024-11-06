@@ -38,7 +38,7 @@ jobs:
       - name: Run unit test
         run: | 
           cd ${{ github.workspace }} 
-          python -m unittest "Unit test.py"
+          python -m unittest "Unit-test.py"
 
   save_and_download_model:
     runs-on: ubuntu-latest
@@ -59,13 +59,14 @@ jobs:
 
       - name: Run NN.py script and save model
         run: |
-          python "C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/NN.py"  
+          cd ${{ github.workspace }}/Model 
+          python "NN.py"
 
       - name: Save Model as Artifact
         uses: actions/upload-artifact@v2
         with:
           name: diabetes-model  # Artifact name
-          path: path_to_your_saved_model  # Specify the path to where your model is saved
+          path: C:\Users\Sid\Desktop\DSOR 752  # Specify the path to where your model is saved
 
       - name: Download Model Artifact
         uses: actions/download-artifact@v2
