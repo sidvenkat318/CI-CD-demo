@@ -70,3 +70,7 @@ model.compile(optimizer=opt,
                 loss='binary_crossentropy',
                 metrics=['accuracy'])
 
+import pickle
+
+with open('C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/diabetes_model.pkl', 'wb') as f:
+    pickle.dump(model, f)
