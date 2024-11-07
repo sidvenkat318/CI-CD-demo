@@ -46,4 +46,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: diabetes-model  
-          path: "C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/diabetes_model.pkl"
+          path: "Model/diabetes_model.pkl"
+            
