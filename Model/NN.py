@@ -72,5 +72,5 @@ model.compile(optimizer=opt,
 
 import pickle
 
-with open('C:/Users/Sid/Desktop/DSOR 752/CI-CD-demo/Model/diabetes_model.pkl', 'wb') as f:
+with open('Model/diabetes_model.pkl', 'wb') as f:
     pickle.dump(model, f)
