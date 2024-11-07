@@ -46,5 +46,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: diabetes-model  
-          path: "Model/diabetes_model.pkl"
+          path: | 
+            cd ${{ github.workspace }}/Model 
+            "diabetes_model.pkl"
             
